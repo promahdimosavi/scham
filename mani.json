@@ -1,0 +1,29 @@
+
+  {
+    "version": "1.0",
+    "name": "My dApp",
+    "description": "A decentralized application using TonConnect.",
+    "icons": [
+      "https://promahdimosavi.github.io/schams/icon.png"
+    ],
+    "url": "https://promahdimosavi.github.io/schams/",
+    "short_name": "MyApp",
+    "methods": [
+      {
+        "name": "sendTransaction",
+        "params": [
+          {
+            "name": "to",
+            "type": "address",
+            "description": "The address to send funds to."
+          },
+          {
+            "name": "amount",
+            "type": "string",
+            "description": "Amount to send in nANO (nanoTON)."
+          }
+        ]
+      }
+    ]
+  }
+  
