@@ -7,36 +7,41 @@
     <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
 </head>
 <body>
-
     <div id="ton-connect"></div>
-    <button id="send-transaction" style="display:none;">Send Transaction test</button>
-    
+    <button id="send-transaction" style="display:none;">ارسال تراکنش</button>
+
     <script>
+        // تنظیم TonConnect
         const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
-            manifestUrl: 'https://promahdimosavi.github.io/schams/manifest.json',
-            buttonRootId: 'ton-connect',
+            manifestUrl: 'https://promahdimosavi.github.io/scham/manifest.json', // آدرس منیفست
+            buttonRootId: 'ton-connect'
         });
 
         tonConnectUI.on('connect', async () => {
+            // بعد از اتصال دکمه ارسال تراکنش نمایش داده می‌شود
             document.getElementById('send-transaction').style.display = 'block';
         });
 
-        async function createTransaction() {
+        // ساخت تراکنش و ارسال آن
+        async function sendTransaction() {
             try {
-                const params = {
-                    to: 'UQAuRPdn4DnWDpCwZQhgwSMZx2wMDcr2JsnGdaSSfcjPtIng',  // Replace with recipient address
-                    amount: '1000000000',             // NanoTON
-                    message: 'Test transaction',      // Message for the transaction
+                // پیام تراکنش
+                const transaction = {
+                    to: 'UQAuRPdn4DnWDpCwZQhgwSMZx2wMDcr2JsnGdaSSfcjPtIng',  // آدرس گیرنده
+                    amount: '1000000000', // مقدار تراکنش به نانوTON (مثلاً 1 TON)
+                    message: 'تراکنش آزمایشی از dApp', // پیام تراکنش
                 };
 
-                const response = await tonConnectUI.requestTransaction(params);
-                console.log('Transaction response:', response);
+                // ارسال تراکنش
+                await tonConnectUI.sendTransaction(transaction);
+                console.log('تراکنش با موفقیت ارسال شد');
             } catch (error) {
-                console.error('Transaction failed:', error);
+                console.error('خطا در ارسال تراکنش:', error);
             }
         }
 
-        document.getElementById('send-transaction').addEventListener('click', createTransaction);
+        // وقتی دکمه ارسال تراکنش کلیک می‌شود، تراکنش ارسال می‌شود
+        document.getElementById('send-transaction').addEventListener('click', sendTransaction);
 
     </script>
 
