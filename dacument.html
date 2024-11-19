@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TonConnect Transaction</title>
+    <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+</head>
+<body>
+
+    <div id="ton-connect"></div>
+    <button id="send-transaction" style="display:none;">Send Transaction</button>
+    
+    <script>
+        const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+            manifestUrl: 'https://promahdimosavi.github.io/schams/manifest.json',
+            buttonRootId: 'ton-connect',
+        });
+
+        tonConnectUI.on('connect', () => {
+            document.getElementById('send-transaction').style.display = 'block';
+        });
+
+        async function createTransaction() {
+            const address = await tonConnectUI.getAddress();
+            const params = {
+                to: '0:recipient_address_here',
+                amount: '1000000000', // nanoTON
+                message: 'Test transaction',
+            };
+
+            try {
+                const response = await tonConnectUI.requestTransaction(params);
+                console.log('Transaction response:', response);
+            } catch (error) {
+                console.error('Transaction failed:', error);
+            }
+        }
+
+        document.getElementById('send-transaction').addEventListener('click', createTransaction);
+
+    </script>
+
+</body>
+</html>
