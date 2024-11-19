@@ -17,19 +17,18 @@
             buttonRootId: 'ton-connect',
         });
 
-        tonConnectUI.on('connect', () => {
+        tonConnectUI.on('connect', async () => {
             document.getElementById('send-transaction').style.display = 'block';
         });
 
         async function createTransaction() {
-            const address = await tonConnectUI.getAddress();
-            const params = {
-                to: '0:recipient_address_here',
-                amount: '1000000000', // nanoTON
-                message: 'Test transaction',
-            };
-
             try {
+                const params = {
+                    to: '0:recipient_address_here',  // Replace with recipient address
+                    amount: '1000000000',             // NanoTON
+                    message: 'Test transaction',      // Message for the transaction
+                };
+
                 const response = await tonConnectUI.requestTransaction(params);
                 console.log('Transaction response:', response);
             } catch (error) {
