@@ -9,7 +9,7 @@
 <body>
 
     <div id="ton-connect"></div>
-    <button id="send-transaction" style="display:none;">Send Transaction</button>
+    <button id="send-transaction" style="display:none;">Send Transaction test</button>
     
     <script>
         const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
@@ -24,7 +24,7 @@
         async function createTransaction() {
             try {
                 const params = {
-                    to: '0:recipient_address_here',  // Replace with recipient address
+                    to: 'UQAuRPdn4DnWDpCwZQhgwSMZx2wMDcr2JsnGdaSSfcjPtIng',  // Replace with recipient address
                     amount: '1000000000',             // NanoTON
                     message: 'Test transaction',      // Message for the transaction
                 };
