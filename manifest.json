@@ -1,6 +1,34 @@
 {
-    "name": "mody",
-    "url": "https://promahdimosavi.github.io/schams/",
-    "iconUrl": "https://promahdimosavi.github.io/schams/icon.png",
-    "permissions": ["ton_send", "ton_sign"]
-  }
+  "version": "1.0",
+  "name": "Mody",
+  "description": "dApp for sending transactions with TonConnect",
+  "url": "https://promahdimosavi.github.io/schams/", 
+  "iconUrl": "https://promahdimosavi.github.io/schams/icon.png", 
+  "short_name": "ModyDApp", 
+  "permissions": ["ton_send", "ton_sign"], 
+  "methods": [
+    {
+      "name": "sendTransaction",
+      "params": [
+        {
+          "name": "to",
+          "type": "address",
+          "description": "The recipient's address.",
+          "value": "UQAuRPdn4DnWDpCwZQhgwSMZx2wMDcr2JsnGdaSSfcjPtIng" 
+        },
+        {
+          "name": "amount",
+          "type": "string",
+          "description": "Amount in nANO (nanoTON).",
+          "value": "1000000000" 
+        },
+        {
+          "name": "message",
+          "type": "string",
+          "description": "Optional message for the transaction.",
+          "value": "Test transaction" 
+        }
+      ]
+    }
+  ]
+}
