@@ -37,31 +37,21 @@
     <div id="wallet-info"></div>
 
     <script>
-        // ایجاد نمونه TonConnectUI
-        const tonConnectUI = new TonConnectUI({
-            manifestUrl: 'https://promahdimosavi.github.io/schams/manifest.json'
+        const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
+            manifestUrl: 'https://promahdimosavi.github.io/schams/manifest.json',
+            buttonRootId: 'ton-connect-button'
         });
 
-        // تنظیم کلیک دکمه
-        document.getElementById("ton-connect-button").addEventListener("click", async () => {
-            try {
-                // شروع اتصال
-                await tonConnectUI.connectWallet();
-                const wallet = tonConnectUI.wallet;
-
-                // نمایش اطلاعات کیف پول
-                if (wallet) {
-                    document.getElementById("wallet-info").innerHTML = `اتصال موفق! آدرس ولت: ${wallet.account.address}`;
-                    console.log("اطلاعات حساب:", wallet);
-                } else {
-                    document.getElementById("wallet-info").innerHTML = "اتصال انجام نشد. لطفاً دوباره تلاش کنید.";
-                }
-            } catch (error) {
-                // مدیریت خطاها
+        document.getElementById("ton-connect-button").addEventListener("click", () => {
+            tonConnectUI.connect().then((wallet) => {
+                document.getElementById("wallet-info").innerHTML = `اتصال موفق! آدرس ولت: ${wallet.address}`;
+            }).catch((error) => {
                 console.error("اتصال با شکست مواجه شد:", error);
-                document.getElementById("wallet-info").innerHTML = "خطا در اتصال. لطفاً دوباره تلاش کنید.";
-            }
+                document.getElementById("wallet-info").innerHTML = "خطا در اتصال. لطفا دوباره تلاش کنید.";
+            });
         });
+
+        
     </script>
 
 </body>
