@@ -1,58 +1,44 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>کانکت</title>
+    <title>TontestConnect Transaction</title>
+    <!-- بارگذاری کتابخانه از CDN -->
     <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 50px;
-        }
-        #ton-connect-button {
-            background-color: #0066cc;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            font-size: 18px;
-            border-radius: 5px;
-        }
-        #ton-connect-button:hover {
-            background-color: #0055a5;
-        }
-        #wallet-info {
-            margin-top: 20px;
-            font-size: 18px;
-        }
-    </style>
 </head>
-<body>
 
-    <h1>اتصال به ولت تون کیپر</h1>
-    <button id="ton-connect-button">اتصال به تون کیپر</button>
-    
-    <div id="wallet-info"></div>
+<body>
+    <div id="ton-connect"></div>
 
     <script>
-        const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
-            manifestUrl: 'https://promahdimosavi.github.io/schams/manifest.json',
-            buttonRootId: 'ton-connect-button'
-        });
-
-        document.getElementById("ton-connect-button").addEventListener("click", () => {
-            tonConnectUI.connect().then((wallet) => {
-                document.getElementById("wallet-info").innerHTML = `اتصال موفق! آدرس ولت: ${wallet.address}`;
-            }).catch((error) => {
-                console.error("اتصال با شکست مواجه شد:", error);
-                document.getElementById("wallet-info").innerHTML = "خطا در اتصال. لطفا دوباره تلاش کنید.";
+        // منتظر بارگذاری صفحه
+        document.addEventListener("DOMContentLoaded", async () => {
+            const tonConnectUI = new TonConnectUI({ // اتصال به اپلیکیشن
+                manifestUrl: 'https://promahdimosavi.github.io/schams/manifest.json',
+                buttonRootId: 'ton-connect'
             });
+
+            // تراکنش
+            const transaction = {
+                messages: [
+                    {
+                        address: "EQABa48hjKzg09hN_HjxOic7r8T1PleIy1dRd8NvZ3922MP0", // آدرس مقصد
+                        amount: "20000000" // مقدار تون کوین به نانوتن‌ها
+                    }
+                ]
+            }
+
+            try {
+                // ارسال تراکنش
+                const result = await tonConnectUI.sendTransaction(transaction);
+                console.log(result); // نمایش نتیجه تراکنش
+            } catch (error) {
+                console.error("Error sending transaction:", error);
+            }
         });
-
-        
     </script>
-
 </body>
+
 </html>
