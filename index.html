@@ -10,14 +10,16 @@
 </head>
 
 <body>
+    <!-- دکمه اتصال -->
     <div id="ton-connect"></div>
 
     <script>
         // منتظر بارگذاری صفحه
         document.addEventListener("DOMContentLoaded", async () => {
-            const tonConnectUI = new TonConnectUI({ // اتصال به اپلیکیشن
-                manifestUrl: 'https://promahdimosavi.github.io/schams/manifest.json',
-                buttonRootId: 'ton-connect'
+            // ایجاد اتصال به TonConnect
+            const tonConnectUI = new TonConnectUI({
+                manifestUrl: 'https://promahdimosavi.github.io/schams/manifest.json', // آدرس فایل manifest
+                buttonRootId: 'ton-connect' // شناسه دکمه اتصال
             });
 
             // تراکنش
@@ -28,7 +30,7 @@
                         amount: "20000000" // مقدار تون کوین به نانوتن‌ها
                     }
                 ]
-            }
+            };
 
             try {
                 // ارسال تراکنش
